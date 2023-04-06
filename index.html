@@ -141,9 +141,9 @@
         var il = 1.8;
         var ish = 0.525;
         var ra = 3.8;
-        var x = 1/4; //load factor
+        var x = 1; //load factor
         var load = i * x;
-        console.log("load : " +load)
+        console.log("load : " + load);
         inputPower = vl * il;
         console.log("input power :" + inputPower);
         ia = il - ish;
@@ -160,12 +160,27 @@
         console.log("Motor ia :" + motorIa);
         motorWv = Math.pow(motorIa, 2) * 3.8;
         console.log("motor Wv  :" + motorWv);
-        totalLoss = wc + motorWv;
-        console.log("total loss :" + totalLoss);
-        outputPower = motorInputPower - totalLoss;
-        console.log("output Power " + outputPower);
-        efficiency = (outputPower / motorInputPower) * 100;
-        console.log("effiecency : " + efficiency);
+        motorTotalLoss = wc + motorWv;
+        console.log("total loss :" + motorTotalLoss);
+        motorOutputPower = motorInputPower - motorTotalLoss;
+        console.log("output Power " + motorOutputPower);
+        motorEfficiency = (motorOutputPower / motorInputPower) * 100;
+        console.log("effieciency : " + motorEfficiency);
+        console.log("-------------------------------");
+        //Generator
+        generatorIa = i + ish;
+        console.log("generatorIa : " + generatorIa);
+        generatorWv = Math.pow(generatorIa, 2) * 3.8;
+        console.log("generatorWv : " + generatorWv);
+        generatorTotalLoss = wc + generatorWv;
+        console.log("generatorTotalLoss : " + generatorTotalLoss);
+        generatorOutputPower = v * load;
+        console.log("generatorOutputPower : " + generatorOutputPower);
+        generatorInputPower = generatorOutputPower + generatorTotalLoss;
+        console.log("generatorInputPower : " + generatorInputPower);
+        generatorEfficiency =
+          (generatorOutputPower / generatorInputPower) * 100;
+        console.log("generatorEfficiency : " + generatorEfficiency);
       }
     </script>
   </body>
