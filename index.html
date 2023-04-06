@@ -135,13 +135,15 @@
       }
 
       function calculate(namePlateDetails, observationTable) {
-        var v = 220;
+        //machine details
+        var v = 220 ;
         var i = 18;
+        //tabluar column
         var vl = 217;
         var il = 1.8;
-        var ish = 0.525;
+        var ish = .525;
         var ra = 3.8;
-        var x = 1; //load factor
+        var x = 1/4; //load factor
         var load = i * x;
         console.log("load : " + load);
         inputPower = vl * il;
@@ -168,7 +170,7 @@
         console.log("effieciency : " + motorEfficiency);
         console.log("-------------------------------");
         //Generator
-        generatorIa = i + ish;
+        generatorIa = load + ish;
         console.log("generatorIa : " + generatorIa);
         generatorWv = Math.pow(generatorIa, 2) * 3.8;
         console.log("generatorWv : " + generatorWv);
