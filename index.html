@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form>
+      <h1>Machine Details</h1>
+      <table>
+        <tr>
+          <th>Voltage</th>
+          <td>
+            <input
+              type="number"
+              name="v"
+              value=""
+              id="v"
+              onchange="namePlateDetail()"
+            />
+            Volts
+          </td>
+        </tr>
+        <tr>
+          <th>Current</th>
+          <td>
+            <input
+              type="number"
+              name="i"
+              value=""
+              id="i"
+              onchange="namePlateDetail()"
+            />
+            amps
+          </td>
+        </tr>
+        <tr>
+          <th>Output</th>
+          <td>
+            <input
+              type="number"
+              name="Output"
+              value=""
+              id="Output"
+              onchange="namePlateDetail()"
+            />
+            HP
+          </td>
+        </tr>
+        <tr>
+          <th>Speed</th>
+          <td>
+            <input
+              type="number"
+              name="N"
+              value=""
+              id="N"
+              onchange="namePlateDetail()"
+            />
+            rpm
+          </td>
+        </tr>
+      </table>
+    </form>
+    <script></script>
+    <form action="" method="post">
+      <label for="">vl</label>
+      <input
+        type="number"
+        name="vl"
+        value=""
+        id="vl"
+        onchange="observationTable()"
+      /><br />
+      <label for="">il</label>
+      <input
+        type="number"
+        name="il"
+        value=""
+        id="il"
+        onchange="observationTable()"
+      /><br />
+      <label for="">ish</label>
+      <input
+        type="number"
+        name="ish"
+        value=""
+        id="ish"
+        onchange="observationTable()"
+      /><br />
+      <label for="">ra</label>
+      <input
+        type="number"
+        name="ra"
+        value=""
+        id="ra"
+        onchange="observationTable()"
+      /><br />
+      <label for="">Load Factor</label>
+      <input
+        type="number"
+        name="x"
+        value=""
+        id="x"
+        onchange="observationTable()"
+      /><br />
+      <input
+        type="button"
+        value="calculate"
+        name="submit"
+        onclick="calculate()"
+      />
+    </form>
+    <h1>Motor</h1>
+    <p>Input Power :</p>
+    <script>
+      var v = namePlateDetails.value;
+      var namePlateDetails = function namePlateDetail() {
+        var v = parseFloat(document.getElementById("v").value);
+        var i = parseFloat(document.getElementById("i").value);
+        var Output = parseFloat(document.getElementById("Output").value);
+        var N = parseFloat(document.getElementById("N").value);
+        return namePlateDetails;
+      };
+      console.log(v);
+      function observationTable() {
+        var vl = parseFloat(document.getElementById("vl").value);
+        var il = parseFloat(document.getElementById("il").value);
+        var ish = parseFloat(document.getElementById("ish").value);
+        var ra = parseFloat(document.getElementById("ra").value);
+        var x = parseFloat(document.getElementById("x").value);
+      }
+
+      function calculate(namePlateDetails, observationTable) {
+        var v = 220;
+        var i = 18;
+        var vl = 217;
+        var il = 1.8;
+        var ish = 0.525;
+        var ra = 3.8;
+        var x = 1/4; //load factor
+        var load = i * x;
+        console.log("load : " +load)
+        inputPower = vl * il;
+        console.log("input power :" + inputPower);
+        ia = il - ish;
+        console.log("ia :" + ia);
+        wv = Math.pow(ia, 2) * 3.8;
+        console.log("wv :" + wv);
+        wc = inputPower - wv;
+        console.log("wc :" + wc);
+        // Motor
+
+        motorInputPower = v * load;
+        console.log(" Motor input power :" + motorInputPower);
+        motorIa = load - ish;
+        console.log("Motor ia :" + motorIa);
+        motorWv = Math.pow(motorIa, 2) * 3.8;
+        console.log("motor Wv  :" + motorWv);
+        totalLoss = wc + motorWv;
+        console.log("total loss :" + totalLoss);
+        outputPower = motorInputPower - totalLoss;
+        console.log("output Power " + outputPower);
+        efficiency = (outputPower / motorInputPower) * 100;
+        console.log("effiecency : " + efficiency);
+      }
+    </script>
+  </body>
+</html>
